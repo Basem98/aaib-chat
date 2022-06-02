@@ -59,7 +59,6 @@ socket.on('announce', (users) => {
   const usernamesContainer = document.querySelector('.usernames-container');
   const usersNumberSpan = document.getElementById('users-num');
   usersNumberSpan.textContent = users.length;
-  // usersNumberSpan.textContent = users.length == 1 ? 0 : users.length - 1;
   usernamesContainer.innerHTML = '';
   if (users.length > 0)
     users.forEach(user => {
