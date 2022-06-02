@@ -1,8 +1,8 @@
-const socket = io();
 const sendMsg = document.querySelector('.sendMsg-btn');
 const msgToSend = document.getElementsByTagName('textarea')[0];
 /* This client's user */
 const username = localStorage.getItem('username');
+const socket = io('/', { query: { username } });
 
 document.querySelector('.welcome-msg').textContent = `Welcome to B-Chat, ${username}!`
 
