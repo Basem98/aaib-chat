@@ -58,15 +58,17 @@ sendMsg.addEventListener('click', () => {
 socket.on('announce', (users) => {
   const usernamesContainer = document.querySelector('.usernames-container');
   const usersNumberSpan = document.getElementById('users-num');
-  usersNumberSpan.textContent = users.length == 1 ? 0 : users.length - 1;
+  usersNumberSpan.textContent = users.length;
+  // usersNumberSpan.textContent = users.length == 1 ? 0 : users.length - 1;
   usernamesContainer.innerHTML = '';
-  users.forEach(user => {
-    if (user != username) {
-      const span = document.createElement('span');
-      span.innerText += `-> ${user}`;
-      usernamesContainer.appendChild(span);
-    }
-  });
+  if (users.length > 0)
+    users.forEach(user => {
+      if (user != username) {
+        const span = document.createElement('span');
+        span.innerText += `-> ${user}`;
+        usernamesContainer.appendChild(span);
+      }
+    });
 });
 
 /* When a message is recieved update the page with the new message */

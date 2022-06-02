@@ -34,7 +34,7 @@ app.get('/signin', (req, res) => {
 /* ------------ Listen on any connection to your opened socket ------------ */
 socketConnection.on('connection', (socket) => {
   /* Announce to all the connected sockets that a new connection is made */
-  socket.emit('announce', users);
+  socket.emit('announce', users.length === 1 ? [] : users);
   socket.broadcast.emit('announce', users);
 
   socket.on('message', (message) => {

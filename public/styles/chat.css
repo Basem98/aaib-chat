@@ -85,14 +85,13 @@ header h1 {
 }
 
 #sentMessage {
-  width: 90%;
+  width: 70%;
   text-overflow: ellipsis;
   resize: none;
 
 }
 
 .sendMsg-btn {
-  width: 10%;
   padding: 1em;
   background-color: #332FD0;
   border: none;
