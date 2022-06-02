@@ -25,7 +25,7 @@ app.get('/', (req, res) => res.sendFile(path.resolve(__dirname, './public/home.h
 
 app.get('/signin', (req, res) => {
   /* Get from the request url the letters following the username query string */
-  const username = req.url.match(/(?<=.*username=)[a-z]+/i).toString();
+  const username = decodeURIComponent(req.url.split('=')[1]);
   users.push({ username, loggedAt: (new Date).toUTCString() });
   res.redirect('/chat.html');
 });
