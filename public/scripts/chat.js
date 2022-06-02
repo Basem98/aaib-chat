@@ -38,7 +38,7 @@ sendMsg.addEventListener('click', () => {
     },
     username,
     timestamp: {
-      value: (new Date).toUTCString()
+      value: Date()
     }
   };
   renderMsg(messageObj, 'myMsgs');
@@ -50,22 +50,15 @@ sendMsg.addEventListener('click', () => {
 socket.on('announce', (users) => {
   const usernamesContainer = document.querySelector('.usernames-container');
   const usersNumberSpan = document.getElementById('users-num');
-  const currentUser = localStorage.getItem('username');
-  const newUsers = [currentUser];
-  usersNumberSpan.textContent = users.length > 0 ? users.length - 1 : 0;
-
+  usersNumberSpan.textContent = users.length == 1 ? 0 : users.length - 1;
   usernamesContainer.innerHTML = '';
   users.forEach(user => {
-    if (user.username != currentUser) {
+    if (user != username) {
       const span = document.createElement('span');
-      span.innerText += `-> ${user.username}`;
+      span.innerText += `-> ${user}`;
       usernamesContainer.appendChild(span);
-      newUsers.push(user.username);
     }
-  })
-
-  localStorage.setItem('users', newUsers);
-
+  });
 });
 
 /* When a message is recieved update the page with the new message */

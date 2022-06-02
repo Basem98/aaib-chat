@@ -26,20 +26,22 @@ app.get('/', (req, res) => res.sendFile(path.resolve(__dirname, './public/home.h
 app.get('/signin', (req, res) => {
   /* Get from the request url the letters following the username query string */
   const username = decodeURIComponent(req.url.split('=')[1]);
-  users.push({ username, loggedAt: Date() });
+  users.push(username);
   res.redirect('/chat.html');
 });
 
 /* ------------ Listen on any connection to your opened socket ------------ */
 socketConnection.on('connection', (socket) => {
-  console.log('connected')
+  /* Announce to all the connected sockets that a new connection is made */
   socket.emit('announce', users);
   socket.broadcast.emit('announce', users);
+
   socket.on('message', (message) => {
     socket.broadcast.emit('message', message);
   });
+
   socket.on('disconnect', () => {
-    users = users.filter(user => user.username != socket.handshake.query.username);
+    users = users.filter(user => user != socket.handshake.query.username);
     socket.broadcast.emit('announce', users);
   });
 });
