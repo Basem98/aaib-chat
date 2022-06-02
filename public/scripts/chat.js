@@ -2,6 +2,14 @@ const sendMsg = document.querySelector('.sendMsg-btn');
 const msgToSend = document.getElementsByTagName('textarea')[0];
 /* This client's user */
 const username = localStorage.getItem('username');
+
+/* If this user hasn't signed in before, don't let them in */
+if (!username) {
+  alert('You have to sign in by entering your username to be able to join the chat!');
+  window.location = '/';
+}
+
+
 const socket = io('/', { query: { username } });
 
 document.querySelector('.welcome-msg').textContent = `Welcome to B-Chat, ${username}!`
