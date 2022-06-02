@@ -11,7 +11,7 @@ const server = http.createServer(app);
 const socketConnection = new Socket(server);
 const PORT = process.env.PORT || 5500;
 
-let users = [];
+let users = JSON.parse(fs.readFileSync('users.json'));
 
 /* ------------ Parse incoming body data ------------ */
 app.use(express.json());
@@ -27,6 +27,7 @@ app.get('/signin', (req, res) => {
   /* Get from the request url the letters following the username query string */
   const username = decodeURIComponent(req.url.split('=')[1]);
   users.push(username);
+  fs.writeFileSync('users.json', JSON.stringify(users));
   res.redirect('/chat.html');
 });
 
@@ -42,6 +43,7 @@ socketConnection.on('connection', (socket) => {
 
   socket.on('disconnect', () => {
     users = users.filter(user => user != socket.handshake.query.username);
+    fs.writeFileSync('users.json', JSON.stringify(users));
     socket.broadcast.emit('announce', users);
   });
 });
