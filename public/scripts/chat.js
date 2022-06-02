@@ -12,7 +12,7 @@ if (!username) {
 
 const socket = io('/', { query: { username } });
 
-document.querySelector('.welcome-msg').textContent = `Welcome to B-Chat, ${username}!`
+document.querySelector('.welcome-msg').textContent = `Welcome to AAIB-Chat, ${username}!`
 
 /**
  * A helper function that takes an object with information about a message,
