@@ -1,0 +1,54 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #332FD0;
+}
+
+header {
+  background-color: #9254C8;
+  padding: 20px;
+}
+
+header h1 {
+  text-align: center;
+  color: #6EDCD9;
+}
+
+form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color:#6EDCD9;
+  height: 500px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#user {
+  padding: 10px 20px;
+  width: 250px;
+  margin-bottom: 50px;
+}
+
+#signin-btn {
+  padding: 10px 20px;
+  background-color: #9254C8;
+  border: none;
+}
+
+#signin-btn:hover {
+  transform: scale(1.1);
+  background-color: #332FD0;
+}
+
+#signin-btn:focus {
+  transform: scale(0.9);
+}

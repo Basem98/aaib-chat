@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>ourChat</title>
+  <link rel="stylesheet" href="./styles/chat.css">
+</head>
+
+<body>
+  <header>
+    <h1 class="welcome-msg"></h1>
+  </header>
+  <div class="users-container">
+    <p>Now online: <span id="users-num"></span></p>
+    <p class="usernames-container"></p>
+  </div>
+  <div class="chatbox-container">
+    <div class="chatbox">
+      <h4>Chatbox</h4>
+    </div>
+    <div class="inputSender">
+      <textarea name="" id="sentMessage" rows="2"></textarea>
+      <button class="sendMsg-btn">Send</button>
+    </div>
+  </div>
+  <script src="socket.io/socket.io.js"></script>
+  <script src="./scripts/chat.js"></script>
+</body>
+
+</html>
