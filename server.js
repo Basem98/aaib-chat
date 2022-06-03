@@ -33,8 +33,13 @@ app.get('/signin', (req, res) => {
 
 /* ------------ Listen on any connection to your opened socket ------------ */
 socketConnection.on('connection', (socket) => {
+  const socketUser = socket.handshake.query.username;
   /* Announce to all the connected sockets that a new connection is made */
-  socket.emit('announce', users.length === 1 ? [] : users);
+  if (socketUser && !users.includes(socketUser)) {
+    users.push(socketUser);
+    fs.writeFileSync('users.json', JSON.stringify(users));
+  }
+  socket.emit('announce', users);
   socket.broadcast.emit('announce', users);
 
   socket.on('message', (message) => {
@@ -42,7 +47,8 @@ socketConnection.on('connection', (socket) => {
   });
 
   socket.on('disconnect', () => {
-    users = users.filter(user => user != socket.handshake.query.username);
+    console.log('disconnected')
+    users = users.filter(user => user != socketUser);
     fs.writeFileSync('users.json', JSON.stringify(users));
     socket.broadcast.emit('announce', users);
   });
